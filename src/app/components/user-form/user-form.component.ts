@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
+import { formDirectiveProvider } from '@angular/forms/src/directives/reactive_directives/form_group_directive';
 
 /**
  * Logic for user form validation and submission
@@ -28,11 +29,12 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.personForm && this.personForm.value) {
+  onSubmit(formDirective): void {
+    if (this.personForm && this.personForm.value && this.personForm.valid) {
       const newUser = this.personForm.value;
       this._storage.addUser(newUser);
-      this._initForm();
+      formDirective.resetForm();
+      this.personForm.reset();
     }
   }
 
