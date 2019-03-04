@@ -20,11 +20,15 @@
         <mat-label>User Age</mat-label>
         <input matInput placeholder="Enter age" formControlName="age" type="number">
         <mat-error *ngIf="personForm.get('age').hasError('required')">Age is required!</mat-error>
+        <mat-error *ngIf="personForm.get('age').hasError('min')">Age must be a positive number!</mat-error>
+        <mat-error *ngIf="personForm.get('age').hasError('max')">Age cannot be over 120!</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="user-form--form__field">
         <mat-label>User Weight</mat-label>
         <input matInput placeholder="Enter weight in pounds" formControlName="weight" type="number">
         <mat-error *ngIf="personForm.get('weight').hasError('required')">Weight is required!</mat-error>
+        <mat-error *ngIf="personForm.get('weight').hasError('min')">Weight must be 1 or greater!</mat-error>
+        <mat-error *ngIf="personForm.get('weight').hasError('max')">Weight must be less than 1500!</mat-error>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>

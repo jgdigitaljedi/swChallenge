@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
-import { formDirectiveProvider } from '@angular/forms/src/directives/reactive_directives/form_group_directive';
 
 /**
  * Logic for user form validation and submission
@@ -18,7 +17,7 @@ import { formDirectiveProvider } from '@angular/forms/src/directives/reactive_di
 })
 export class UserFormComponent implements OnInit {
   personForm: FormGroup;
-  allUsers;
+  allUsers: IUser[];
   constructor(private _fb: FormBuilder, private _storage: StorageService) {}
 
   ngOnInit() {
@@ -59,8 +58,8 @@ export class UserFormComponent implements OnInit {
     this.personForm = this._fb.group({
       name: ['', Validators.required],
       friends: new FormControl([]),
-      age: ['', Validators.required],
-      weight: ['', Validators.required]
+      age: ['', [Validators.required, Validators.min(0), Validators.max(120)]], // you can't be negative age and we don't live past 120 YET
+      weight: ['', [Validators.required, Validators.min(1), Validators.max(1500)]] // no one weights less than 1 or greater than 1500 YET
     });
   }
 }
