@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
+import { IUser } from 'src/app/models/user.model';
 
 /**
  * Logic for user form validation and submission
@@ -21,13 +22,17 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {
     this._initForm();
+    this._storage.users.subscribe(users => {
+      this.allUsers = users;
+      console.log('this.allUsers', this.allUsers);
+    });
   }
 
   onSubmit(): void {
     if (this.personForm && this.personForm.value) {
-      console.log('form', this.personForm);
-      // @TODO: make call to service here to store
-      this._storage.addUser(this.personForm.value);
+      const newUser = this.personForm.value;
+      this._storage.addUser(newUser);
+      this._initForm();
     }
   }
 
@@ -51,7 +56,7 @@ export class UserFormComponent implements OnInit {
   private _initForm(): void {
     this.personForm = this._fb.group({
       name: ['', Validators.required],
-      friends: this._fb.array([]),
+      friends: new FormControl([]),
       age: ['', Validators.required],
       weight: ['', Validators.required]
     });

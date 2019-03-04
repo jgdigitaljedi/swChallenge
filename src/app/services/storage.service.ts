@@ -23,6 +23,8 @@ export class StorageService {
   addUser(user: IUser): void {
     const newUser = Object.assign({}, user);
     newUser.id = this._id++;
-    this._userList.next(_cloneDeep(this._dataStore.users).push(newUser));
+    this._dataStore.users.push(newUser);
+    const newUsersList = this._dataStore.users;
+    this._userList.next(newUsersList);
   }
 }
