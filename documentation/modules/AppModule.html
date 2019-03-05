@@ -88,6 +88,9 @@
                                     <a href="../components/ChartComponent.html" >ChartComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/InstructionsDialogComponent.html" >InstructionsDialogComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/UserFormComponent.html" >UserFormComponent</a>
                                 </li>
                         </ul>
@@ -255,6 +258,9 @@
                                            <a href="../components/ChartComponent.html" >ChartComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/InstructionsDialogComponent.html" >InstructionsDialogComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/UserFormComponent.html" >UserFormComponent</a>
                                        </li>
                                </ul>
@@ -402,6 +408,9 @@
                             <li class="list-group-item">
                                 <a href="../components/ChartComponent.html">ChartComponent</a>
                             </li>
+                            <li class="list-group-item">
+                                <a href="../components/InstructionsDialogComponent.html">InstructionsDialogComponent</a>
+                            </li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
@@ -442,6 +451,8 @@ import { AppComponent } from &#x27;./app.component&#x27;;
 import { UserFormComponent } from &#x27;./components/user-form/user-form.component&#x27;;
 import { StorageService } from &#x27;./services/storage.service&#x27;;
 import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animations&#x27;;
+import { ChartComponent } from &#x27;./components/chart/chart.component&#x27;;
+import { InstructionsDialogComponent } from &#x27;./components/instructions-dialog/instructions-dialog.component&#x27;;
 
 // material
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
@@ -450,10 +461,12 @@ import { MatCardModule } from &#x27;@angular/material/card&#x27;;
 import { MatIconModule, MatIcon } from &#x27;@angular/material/icon&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
-import { ChartComponent } from &#x27;./components/chart/chart.component&#x27;;
+import { MatDialogModule } from &#x27;@angular/material/dialog&#x27;;
+import { MatListModule } from &#x27;@angular/material/list&#x27;;
+
 
 @NgModule({
-  declarations: [AppComponent, UserFormComponent, ChartComponent],
+  declarations: [AppComponent, UserFormComponent, ChartComponent, InstructionsDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -464,12 +477,15 @@ import { ChartComponent } from &#x27;./components/chart/chart.component&#x27;;
     MatCardModule,
     MatIconModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatListModule
   ],
   providers: [StorageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [InstructionsDialogComponent]
 })
-export class AppModule {}
+export class AppModule { }
 </code></pre>
     </div>
 </div>

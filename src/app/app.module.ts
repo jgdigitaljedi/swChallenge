@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { StorageService } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartComponent } from './components/chart/chart.component';
+import { InstructionsDialogComponent } from './components/instructions-dialog/instructions-dialog.component';
 
 // material
 import { MatButtonModule } from '@angular/material/button';
@@ -17,10 +19,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { ChartComponent } from './components/chart/chart.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
-  declarations: [AppComponent, UserFormComponent, ChartComponent],
+  declarations: [AppComponent, UserFormComponent, ChartComponent, InstructionsDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,9 +35,12 @@ import { ChartComponent } from './components/chart/chart.component';
     MatCardModule,
     MatIconModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatListModule
   ],
   providers: [StorageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [InstructionsDialogComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,4 +1,5 @@
 # SwChallenge
+An exercise using Angular and D3 that allows the user to add people using a form, store the person data in memory via a service using rxjs, and then update a D3 force sim chart. The size of the circle drawn represents the person's weight, color represents age range, and links between circles show who is friends with who. Not much time was spent on making it look nice as I was pressed for time and focused on what I thought was most important.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.4.
 

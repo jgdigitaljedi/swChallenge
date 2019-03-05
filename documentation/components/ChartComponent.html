@@ -88,6 +88,9 @@
                                     <a href="../components/ChartComponent.html"  class="active" >ChartComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/InstructionsDialogComponent.html" >InstructionsDialogComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/UserFormComponent.html" >UserFormComponent</a>
                                 </li>
                         </ul>
@@ -253,6 +256,9 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ChartComponent.html"  class="active" >ChartComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/InstructionsDialogComponent.html" >InstructionsDialogComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/UserFormComponent.html" >UserFormComponent</a>
@@ -648,7 +654,7 @@ import { IGraph, ILink, IColor, IChartData } from &#x27;./chart.model&#x27;;
 export class ChartComponent implements OnInit {
   @ViewChild(&#x27;chart&#x27;) private chartContainer: ElementRef;
   allUsers: IUser[];
-  margin &#x3D; { top: 20, right: 20, bottom: 30, left: 40 };
+  margin &#x3D; { top: 20, right: 20, bottom: 30, left: 40 }; // implicitly typed
   colorArr: IColor[] &#x3D; [
     { key: 0, value: &#x27;#f44336&#x27;, range: &#x27;0 - 9&#x27; },
     { key: 1, value: &#x27;#9c27b0&#x27;, range: &#x27;10 - 19&#x27; },
@@ -712,6 +718,7 @@ export class ChartComponent implements OnInit {
 
     this._drawLegend(svg);
 
+    // setup force
     const force &#x3D; d3
       .forceSimulation()
       .force(&#x27;link&#x27;, d3.forceLink().distance(250))
@@ -720,6 +727,7 @@ export class ChartComponent implements OnInit {
 
     const graph: IGraph &#x3D; &lt;IGraph&gt;{ nodes: data, links };
 
+    // add links
     const link &#x3D; svg
       .append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;links&#x27;)
@@ -730,10 +738,12 @@ export class ChartComponent implements OnInit {
       .attr(&#x27;stroke-width&#x27;, 3)
       .attr(&#x27;stroke&#x27;, &#x27;#000&#x27;);
 
+    // create group for nodes
     const svgNode &#x3D; svg
       .append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;nodes&#x27;);
 
+    // add g for individual node
     const node &#x3D; svgNode
       .selectAll(&#x27;.node&#x27;)
       .data(graph.nodes)
@@ -748,6 +758,7 @@ export class ChartComponent implements OnInit {
       );
 
 
+    // add circle to node group
     const circle &#x3D; node
       .append(&#x27;circle&#x27;)
       .attr(&#x27;r&#x27;, d &#x3D;&gt; {
@@ -757,6 +768,7 @@ export class ChartComponent implements OnInit {
         return this.colorArr.filter(color &#x3D;&gt; color.key &#x3D;&#x3D;&#x3D; Math.floor(d.age / 10))[0].value;
       });
 
+    // add text to node group
     const text &#x3D; node
       .append(&#x27;text&#x27;)
       .text(d &#x3D;&gt; d.name)
@@ -765,11 +777,8 @@ export class ChartComponent implements OnInit {
       .attr(&#x27;font-size&#x27;, 14)
       .style(&#x27;fill&#x27;, &#x27;#fafafa&#x27;);
 
-    force.nodes(graph.nodes).on(&#x27;tick&#x27;, ticked);
-
-    force.force&lt;d3.ForceLink&lt;any, any&gt;&gt;(&#x27;link&#x27;).links(graph.links);
-
-    function ticked() {
+    // tick event listener and actions
+    force.nodes(graph.nodes).on(&#x27;tick&#x27;, () &#x3D;&gt; {
       link
         .attr(&#x27;x1&#x27;, function (d: any) {
           return d.source.x;
@@ -785,8 +794,14 @@ export class ChartComponent implements OnInit {
         });
 
       node.attr(&#x27;transform&#x27;, function (d) { return &#x27;translate(&#x27; + [d.x, d.y] + &#x27;)&#x27;; })
-    }
+    });
 
+    force.force&lt;d3.ForceLink&lt;any, any&gt;&gt;(&#x27;link&#x27;).links(graph.links);
+
+    /** These could have been broken into component methods but weren&#x27;t for time&#x27;s sake for this challenge. 
+     * It would be a lot of typing and hoisting method vars into component vars which is merely time consuming ATM.
+     * Typically I would rarely have functions like this inside a component unless there was recursion or something weird.
+     * */
     function dragstarted(d) {
       if (!d3.event.active) {
         force.alphaTarget(0.3).restart();

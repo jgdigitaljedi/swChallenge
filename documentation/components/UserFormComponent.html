@@ -88,6 +88,9 @@
                                     <a href="../components/ChartComponent.html" >ChartComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/InstructionsDialogComponent.html" >InstructionsDialogComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/UserFormComponent.html"  class="active" >UserFormComponent</a>
                                 </li>
                         </ul>
@@ -253,6 +256,9 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ChartComponent.html" >ChartComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/InstructionsDialogComponent.html" >InstructionsDialogComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/UserFormComponent.html"  class="active" >UserFormComponent</a>
@@ -435,7 +441,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(_fb: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html" target="_blank" >FormBuilder</a>, _storage: any)</code>
+                            <code>constructor(_fb: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html" target="_blank" >FormBuilder</a>, _storage: any, _dialog: MatDialog)</code>
                         </td>
                     </tr>
     
@@ -485,6 +491,30 @@
                                     <div class="io-description">
                                         
                                     </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> openDialog</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>openDialog(event: any)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
                         </td>
                     </tr>
                 </tbody>
@@ -593,8 +623,10 @@
         <div class="tab-pane fade tab-source-code" id="source">
             <pre><code class="hljs javascript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { FormControl, FormGroup, FormBuilder, Validators, FormGroupDirective } from &#x27;@angular/forms&#x27;;
+import { MatDialog } from &#x27;@angular/material&#x27;;
 import { StorageService } from &#x27;src/app/services/storage.service&#x27;;
 import { IUser } from &#x27;src/app/models/user.model&#x27;;
+import { InstructionsDialogComponent } from &#x27;../instructions-dialog/instructions-dialog.component&#x27;;
 
 /**
  * Logic for user form validation and submission
@@ -611,7 +643,7 @@ import { IUser } from &#x27;src/app/models/user.model&#x27;;
 export class UserFormComponent implements OnInit {
   personForm: FormGroup;
   allUsers: IUser[];
-  constructor(private _fb: FormBuilder, private _storage: StorageService) { }
+  constructor(private _fb: FormBuilder, private _storage: StorageService, private _dialog: MatDialog) { }
 
   /**
    * Initializes form group and controls and subscribes to changes in storage service
@@ -622,7 +654,6 @@ export class UserFormComponent implements OnInit {
     this._initForm();
     this._storage.users.subscribe(users &#x3D;&gt; {
       this.allUsers &#x3D; users;
-      console.log(&#x27;this.allUsers&#x27;, this.allUsers);
     });
   }
 
@@ -639,6 +670,14 @@ export class UserFormComponent implements OnInit {
       formDirective.resetForm();
       this.personForm.reset();
     }
+  }
+
+  openDialog(event): void {
+    event.preventDefault();
+    const dialogRef &#x3D; this._dialog.open(InstructionsDialogComponent, {
+      width: &#x27;600px&#x27;,
+      data: {}
+    });
   }
 
   /**

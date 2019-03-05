@@ -23,7 +23,7 @@ import { IGraph, ILink, IColor, IChartData } from './chart.model';
 export class ChartComponent implements OnInit {
   @ViewChild('chart') private chartContainer: ElementRef;
   allUsers: IUser[];
-  margin = { top: 20, right: 20, bottom: 30, left: 40 };
+  margin = { top: 20, right: 20, bottom: 30, left: 40 }; // implicitly typed
   colorArr: IColor[] = [
     { key: 0, value: '#f44336', range: '0 - 9' },
     { key: 1, value: '#9c27b0', range: '10 - 19' },
@@ -87,6 +87,7 @@ export class ChartComponent implements OnInit {
 
     this._drawLegend(svg);
 
+    // setup force
     const force = d3
       .forceSimulation()
       .force('link', d3.forceLink().distance(250))
@@ -95,6 +96,7 @@ export class ChartComponent implements OnInit {
 
     const graph: IGraph = <IGraph>{ nodes: data, links };
 
+    // add links
     const link = svg
       .append('g')
       .attr('class', 'links')
@@ -105,10 +107,12 @@ export class ChartComponent implements OnInit {
       .attr('stroke-width', 3)
       .attr('stroke', '#000');
 
+    // create group for nodes
     const svgNode = svg
       .append('g')
       .attr('class', 'nodes');
 
+    // add g for individual node
     const node = svgNode
       .selectAll('.node')
       .data(graph.nodes)
@@ -123,6 +127,7 @@ export class ChartComponent implements OnInit {
       );
 
 
+    // add circle to node group
     const circle = node
       .append('circle')
       .attr('r', d => {
@@ -132,6 +137,7 @@ export class ChartComponent implements OnInit {
         return this.colorArr.filter(color => color.key === Math.floor(d.age / 10))[0].value;
       });
 
+    // add text to node group
     const text = node
       .append('text')
       .text(d => d.name)
@@ -140,11 +146,8 @@ export class ChartComponent implements OnInit {
       .attr('font-size', 14)
       .style('fill', '#fafafa');
 
-    force.nodes(graph.nodes).on('tick', ticked);
-
-    force.force<d3.ForceLink<any, any>>('link').links(graph.links);
-
-    function ticked() {
+    // tick event listener and actions
+    force.nodes(graph.nodes).on('tick', () => {
       link
         .attr('x1', function (d: any) {
           return d.source.x;
@@ -160,8 +163,14 @@ export class ChartComponent implements OnInit {
         });
 
       node.attr('transform', function (d) { return 'translate(' + [d.x, d.y] + ')'; })
-    }
+    });
 
+    force.force<d3.ForceLink<any, any>>('link').links(graph.links);
+
+    /** These could have been broken into component methods but weren't for time's sake for this challenge. 
+     * It would be a lot of typing and hoisting method vars into component vars which is merely time consuming ATM.
+     * Typically I would rarely have functions like this inside a component unless there was recursion or something weird.
+     * */
     function dragstarted(d) {
       if (!d3.event.active) {
         force.alphaTarget(0.3).restart();

@@ -33,11 +33,11 @@
     </mat-card-content>
     <mat-card-actions class="user-form--actions">
       <button mat-raised-button type="submit" color="accent">
-        <mat-icon>save</mat-icon>&nbsp; Save Friend
+        <mat-icon>save</mat-icon>&nbsp; Save Person
       </button>
-      <!-- <button mat-raised-button (click)="clearForm()">
-        <mat-icon>clear</mat-icon>&nbsp; Clear Form
-      </button> -->
+      <button mat-raised-button (click)="openDialog($event)">
+        <mat-icon>info</mat-icon>&nbsp; Instructions
+      </button>
     </mat-card-actions>
   </form>
 </mat-card>

@@ -5,12 +5,15 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "./node_modules/.bin/compodoc -p tsconfig.json"
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jgdigitaljedi/swChallenge"
+  },
   "dependencies": {
     "@angular/animations": "^7.2.7",
     "@angular/cdk": "^7.3.3",

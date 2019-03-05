@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
+import { InstructionsDialogComponent } from '../instructions-dialog/instructions-dialog.component';
 
 /**
  * Logic for user form validation and submission
@@ -18,7 +20,7 @@ import { IUser } from 'src/app/models/user.model';
 export class UserFormComponent implements OnInit {
   personForm: FormGroup;
   allUsers: IUser[];
-  constructor(private _fb: FormBuilder, private _storage: StorageService) { }
+  constructor(private _fb: FormBuilder, private _storage: StorageService, private _dialog: MatDialog) { }
 
   /**
    * Initializes form group and controls and subscribes to changes in storage service
@@ -29,7 +31,6 @@ export class UserFormComponent implements OnInit {
     this._initForm();
     this._storage.users.subscribe(users => {
       this.allUsers = users;
-      console.log('this.allUsers', this.allUsers);
     });
   }
 
@@ -46,6 +47,14 @@ export class UserFormComponent implements OnInit {
       formDirective.resetForm();
       this.personForm.reset();
     }
+  }
+
+  openDialog(event): void {
+    event.preventDefault();
+    const dialogRef = this._dialog.open(InstructionsDialogComponent, {
+      width: '600px',
+      data: {}
+    });
   }
 
   /**
