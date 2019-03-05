@@ -42,7 +42,7 @@ export class ChartComponent implements OnInit {
     { key: 7, value: '#eeeeee' },
     { key: 8, value: '#b0bec5' }
   ];
-  constructor(private _storage: StorageService) {}
+  constructor(private _storage: StorageService) { }
 
   ngOnInit() {
     this._storage.users.subscribe(users => {
@@ -70,19 +70,19 @@ export class ChartComponent implements OnInit {
     });
     const links = this._getLinks(data);
     console.log('links', links);
+    const contentWidth = element.offsetWidth - this.margin.left - this.margin.right;
+    const contentHeight = element.offsetHeight - this.margin.top - this.margin.bottom;
     const svg = d3
       .select(element)
       .append('svg')
-      .attr('width', element.offsetWidth)
-      .attr('height', element.offsetHeight);
+      .attr('width', contentWidth)
+      .attr('height', contentHeight);
 
-    const contentWidth = element.offsetWidth - this.margin.left - this.margin.right;
-    const contentHeight = element.offsetHeight - this.margin.top - this.margin.bottom;
 
     const force = d3
       .forceSimulation()
-      .force('link', d3.forceLink().distance(200))
-      .force('charge', d3.forceManyBody().strength(-500))
+      .force('link', d3.forceLink().distance(250))
+      .force('charge', d3.forceManyBody().strength(100))
       .force('center', d3.forceCenter(contentWidth / 2, contentHeight / 2));
 
     const graph: Graph = <Graph>{ nodes: data, links };
@@ -97,12 +97,48 @@ export class ChartComponent implements OnInit {
       .attr('stroke-width', 3)
       .attr('stroke', '#000');
 
+    const svgNode = svg
+      .append('g')
+      .attr('class', 'nodes');
+
+    const node = svgNode
+      .selectAll('.node')
+      .data(graph.nodes)
+      .enter().append('g')
+      .attr('class', 'node')
+      .call(
+        d3
+          .drag()
+          .on('start', dragstarted)
+          .on('drag', dragged)
+          .on('end', dragended)
+      );
+
+
+    const circle = node
+      .append('circle')
+      .attr('r', d => {
+        return d['weight'] / 4;
+      })
+      .attr('fill', d => {
+        return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
+      });
+
     // const node = svg
-    //   .append('g')
-    //   .attr('class', 'nodes')
-    //   .selectAll('circle')
+    //   .selectAll('.node')
     //   .data(graph.nodes)
     //   .enter()
+    //   .append('g')
+    //   .attr('class', 'node')
+    //   .call(
+    //     d3
+    //       .drag()
+    //       .on('start', dragstarted)
+    //       .on('drag', dragged)
+    //       .on('end', dragended)
+    //   );
+
+    // node
     //   .append('circle')
     //   .attr('r', d => {
     //     return d['weight'] / 5;
@@ -111,43 +147,27 @@ export class ChartComponent implements OnInit {
     //     return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
     //   });
 
-    const node = svg
-      .selectAll('.node')
-      .data(graph.nodes)
-      .enter()
-      .append('g')
-      .attr('class', 'node');
-
-    node
-      .append('circle')
-      .attr('r', d => {
-        return d['weight'] / 5;
-      })
-      .attr('fill', d => {
-        return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
-      });
-
     const text = node
-      .selectAll('text')
-      .data(graph.nodes)
-      .enter()
+      // .selectAll('text')
+      // .data(graph.nodes)
+      // .enter()
       .append('text')
       .text(d => d['name'])
-      .attr('fill', '#000')
+      .style('text-anchor', 'middle')
       .attr('font-size', 14);
-    // .style('text-anchor', 'middle');
+    // .data(graph.nodes)
+    // .enter()
+    // .append('text')
+    // .text(d => d['name'])
+    // .attr('fill', '#000')
 
-    svg.selectAll('circle').call(
-      d3
-        .drag()
-        .on('start', dragstarted)
-        .on('drag', dragged)
-        .on('end', dragended)
-    );
-
-    force.nodes(graph.nodes);
-    // force.force('link')
-    //   .links(graph.links);
+    // svg.selectAll('.node').call(
+    //   d3
+    //     .drag()
+    //     .on('start', dragstarted)
+    //     .on('drag', dragged)
+    //     .on('end', dragended)
+    // );
 
     force.nodes(graph.nodes).on('tick', ticked);
 
@@ -155,26 +175,27 @@ export class ChartComponent implements OnInit {
 
     function ticked() {
       link
-        .attr('x1', function(d: any) {
+        .attr('x1', function (d: any) {
           return d.source.x;
         })
-        .attr('y1', function(d: any) {
+        .attr('y1', function (d: any) {
           return d.source.y;
         })
-        .attr('x2', function(d: any) {
+        .attr('x2', function (d: any) {
           return d.target.x;
         })
-        .attr('y2', function(d: any) {
+        .attr('y2', function (d: any) {
           return d.target.y;
         });
 
-      node
-        .attr('cx', function(d: any) {
-          return d.x;
-        })
-        .attr('cy', function(d: any) {
-          return d.y;
-        });
+      // node.selectAll('circle')
+      //   .attr('cx', function (d: any) {
+      //     return d.x;
+      //   })
+      //   .attr('cy', function (d: any) {
+      //     return d.y;
+      //   });
+      node.attr("transform", function (d) { return 'translate(' + [d['x'], d['y']] + ')'; })
     }
 
     function dragstarted(d) {
