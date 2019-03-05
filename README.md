@@ -21,6 +21,7 @@ Run &nbsp;`npm start`&nbsp; for a dev server. Navigate to `http://localhost:4200
 Run&nbsp; `npm run build`&nbsp; to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
+I'm a little short on tests ATM but also a little short on time (because life happens). I will TRY to write more tests if I have a chance.
 
 Run&nbsp; `npm run test`&nbsp; to execute the unit tests via [Karma](https://karma-runner.github.io).
 
