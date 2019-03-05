@@ -31,13 +31,13 @@
         <mat-error *ngIf="personForm.get('weight').hasError('max')">Weight must be less than 1500!</mat-error>
       </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="user-form--actions">
       <button mat-raised-button type="submit" color="accent">
         <mat-icon>save</mat-icon>&nbsp; Save Friend
       </button>
-      <button mat-raised-button (click)="clearForm()">
+      <!-- <button mat-raised-button (click)="clearForm()">
         <mat-icon>clear</mat-icon>&nbsp; Clear Form
-      </button>
+      </button> -->
     </mat-card-actions>
   </form>
 </mat-card>

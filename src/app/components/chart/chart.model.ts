@@ -1,4 +1,4 @@
-export interface INode {
+interface INode {
   id: string;
   group: number;
   weight?: number;
@@ -8,7 +8,7 @@ export interface INode {
   y?: number;
 }
 
-export interface ILink {
+interface ILink {
   source: string;
   target: string;
 }
