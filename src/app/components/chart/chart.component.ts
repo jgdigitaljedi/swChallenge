@@ -17,18 +17,19 @@ export class ChartComponent implements OnInit {
   allUsers: IUser[];
   margin = { top: 20, right: 20, bottom: 30, left: 40 };
   colorArr = [
-    { key: 0, value: '#ef9a9a', range: '0 - 9' },
-    { key: 1, value: '#f48fb1', range: '10 - 19' },
-    { key: 2, value: '#ce93d8', range: '20 - 29' },
-    { key: 3, value: '#b39ddb', range: '30 - 39' },
-    { key: 4, value: '#9fa8da', range: '40 - 49' },
-    { key: 5, value: '#90caf9', range: '50 - 59' },
-    { key: 6, value: '#81d4fa', range: '60 - 69' },
-    { key: 7, value: '#80deea', range: '70 - 79' },
-    { key: 8, value: '#80cbc4', range: '80 - 89' },
-    { key: 9, value: '#a5d6a7', range: '90 - 99' },
-    { key: 10, value: '#c5e1a5', range: '100 - 109' },
-    { key: 11, value: '#e6ee9c', range: '110 - 119' }
+    { key: 0, value: '#f44336', range: '0 - 9' },
+    { key: 1, value: '#9c27b0', range: '10 - 19' },
+    { key: 2, value: '#3f51b5', range: '20 - 29' },
+    { key: 3, value: '#2196f3', range: '30 - 39' },
+    { key: 4, value: '#00bcd4', range: '40 - 49' },
+    { key: 5, value: '#009688', range: '50 - 59' },
+    { key: 6, value: '#8bc34a', range: '60 - 69' },
+    { key: 7, value: '#ffeb3b', range: '70 - 79' },
+    { key: 8, value: '#ff9800', range: '80 - 89' },
+    { key: 9, value: '#ff5722', range: '90 - 99' },
+    { key: 10, value: '#795548', range: '100 - 109' },
+    { key: 11, value: '#9e9e9e', range: '110 - 119' },
+    { key: 12, value: '#607d8b', range: '120' }
   ];
   constructor(private _storage: StorageService) { }
 
@@ -65,46 +66,7 @@ export class ChartComponent implements OnInit {
       .attr('width', contentWidth)
       .attr('height', contentHeight);
 
-    const legend = svg
-      .append('g');
-
-    legend
-      .append('rect')
-      .style('fill', '#00BCD4')
-      .attr('color', '#fafafa')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', 200)
-      .attr('height', 270)
-
-    const innerLegend = legend.selectAll('rect')
-      .data(this.colorArr)
-      .enter()
-
-    innerLegend
-      .append('rect')
-      .attr("x", 10)
-      .attr("y", function (d, i) { return i * 20 + 20; })
-      .attr("width", 16)
-      .attr("height", 16)
-      .style("fill", (d) => d.value)
-
-    innerLegend
-      .append('text')
-      .attr('x', 5)
-      .attr('y', 25)
-      .attr('font-size', '24px')
-      .text('Age Range - Color')
-      .attr('fill', '#fafafa');
-
-    innerLegend
-      .append('text')
-      .text((d) => d.range)
-      .attr("x", 40)
-      .attr("y", function (d, i) { return i * 20 + 35; })
-      .attr('fill', '#fafafa')
-      .attr('font-size', '16px');
-
+    this._drawLegend(svg);
 
     const force = d3
       .forceSimulation()
@@ -156,7 +118,8 @@ export class ChartComponent implements OnInit {
       .text(d => d.name)
       .style('text-anchor', 'middle')
       .attr('y', 5)
-      .attr('font-size', 14);
+      .attr('font-size', 14)
+      .style('fill', '#fafafa');
 
     force.nodes(graph.nodes).on('tick', ticked);
 
@@ -177,7 +140,7 @@ export class ChartComponent implements OnInit {
           return d.target.y;
         });
 
-      node.attr("transform", function (d) { return 'translate(' + [d.x, d.y] + ')'; })
+      node.attr('transform', function (d) { return 'translate(' + [d.x, d.y] + ')'; })
     }
 
     function dragstarted(d) {
@@ -200,6 +163,82 @@ export class ChartComponent implements OnInit {
       d.fx = null;
       d.fy = null;
     }
+  }
+
+  /**
+   * Draws legend for force sim chart
+   *
+   * @private
+   * @param {*} svg
+   * @memberof ChartComponent
+   */
+  private _drawLegend(svg): void {
+    const cLen = this.colorArr.length;
+    const legend = svg
+      .append('g');
+
+    legend
+      .append('rect')
+      .style('fill', '#00BCD4')
+      .attr('color', '#fafafa')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', 220)
+      .attr('height', 190);
+
+    const innerLegend = legend.selectAll('rect')
+      .data(this.colorArr)
+      .enter();
+
+    innerLegend
+      .append('rect')
+      .attr('x', (d, i) => {
+        if (i < (cLen / 2)) {
+          return 10;
+        } else {
+          return 110;
+        }
+      })
+      .attr('y', function (d, i) {
+        if (i < (cLen / 2)) {
+          return i * 20 + 32;
+        } else {
+          return ((i + 1) - cLen / 2) * 20 + 22;
+        }
+      })
+      .attr('width', 16)
+      .attr('height', 16)
+      .style('fill', (d) => d.value)
+      .attr('stroke', '#fafafa')
+      .attr('stroke-width', 1);
+
+    innerLegend
+      .append('text')
+      .attr('x', 13)
+      .attr('y', 35)
+      .attr('font-size', '24px')
+      .text('Age Range - Color')
+      .attr('fill', '#fafafa');
+
+    innerLegend
+      .append('text')
+      .text((d) => d.range)
+      .attr('x', (d, i) => {
+        if (i < (cLen / 2)) {
+          return 40;
+        } else {
+          return 140;
+        }
+      })
+      .attr('y', (d, i) => {
+        if (i < (cLen / 2)) {
+          return i * 20 + 45;
+        } else {
+          return ((i + 1) - cLen / 2) * 20 + 35;
+        }
+      })
+      .attr('fill', '#fafafa')
+      .attr('font-size', '16px');
   }
 
   private _getLinks(data) {
