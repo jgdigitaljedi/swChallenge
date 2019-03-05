@@ -17,9 +17,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
-  declarations: [AppComponent, UserFormComponent],
+  declarations: [AppComponent, UserFormComponent, ChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
