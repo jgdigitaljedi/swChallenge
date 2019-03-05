@@ -81,11 +81,9 @@ export class ChartComponent implements OnInit {
 
     const force = d3
       .forceSimulation()
-      .force('link', d3.forceLink())
-      .force('charge', d3.forceManyBody())
-      .force('center', d3.forceCenter(element.offsetWidth / 2, element.offsetHeight / 2));
-
-    // const color = d3.scaleOrdinal(d3.schemeCategory20);
+      .force('link', d3.forceLink().distance(200))
+      .force('charge', d3.forceManyBody().strength(-500))
+      .force('center', d3.forceCenter(contentWidth / 2, contentHeight / 2));
 
     const graph: Graph = <Graph>{ nodes: data, links };
 
@@ -96,28 +94,48 @@ export class ChartComponent implements OnInit {
       .data(graph.links)
       .enter()
       .append('line')
-      .attr('stroke-width', 2);
+      .attr('stroke-width', 3)
+      .attr('stroke', '#000');
+
+    // const node = svg
+    //   .append('g')
+    //   .attr('class', 'nodes')
+    //   .selectAll('circle')
+    //   .data(graph.nodes)
+    //   .enter()
+    //   .append('circle')
+    //   .attr('r', d => {
+    //     return d['weight'] / 5;
+    //   })
+    //   .attr('fill', d => {
+    //     return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
+    //   });
 
     const node = svg
-      .append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
+      .selectAll('.node')
       .data(graph.nodes)
       .enter()
+      .append('g')
+      .attr('class', 'node');
+
+    node
       .append('circle')
       .attr('r', d => {
-        return d['weight'] / 4;
+        return d['weight'] / 5;
       })
       .attr('fill', d => {
         return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
       });
-    // .append('text')
-    // .text(d => d['name']);
-    node
-      .append('g')
+
+    const text = node
+      .selectAll('text')
+      .data(graph.nodes)
       .enter()
       .append('text')
-      .text(d => d['name']);
+      .text(d => d['name'])
+      .attr('fill', '#000')
+      .attr('font-size', 14);
+    // .style('text-anchor', 'middle');
 
     svg.selectAll('circle').call(
       d3
@@ -127,7 +145,9 @@ export class ChartComponent implements OnInit {
         .on('end', dragended)
     );
 
-    node.append('title').text(d => d.id);
+    force.nodes(graph.nodes);
+    // force.force('link')
+    //   .links(graph.links);
 
     force.nodes(graph.nodes).on('tick', ticked);
 
