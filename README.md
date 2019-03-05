@@ -24,6 +24,8 @@ Run&nbsp; `npm run build`&nbsp; to build the project. The build artifacts will b
 
 Run&nbsp; `npm run test`&nbsp; to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+Alternatively you can run &nbsp;`npm run test:watch`&nbsp; to keep the browser window open. I created the other testing task because I've noticed sometimes (in past projects) tests will exit with a non-zero when you are watching and you end up with a Node process running in the background and you might not realize it. If this happens run &nbsp;`killall node`.
+
 ## Generate documentation
 Run&nbsp; `npm run docs`&nbsp;
 
