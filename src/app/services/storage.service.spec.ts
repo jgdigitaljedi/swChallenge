@@ -9,4 +9,13 @@ describe('StorageService', () => {
     const service: StorageService = TestBed.get(StorageService);
     expect(service).toBeTruthy();
   });
+
+  it('should add and get users', () => {
+    const service: StorageService = TestBed.get(StorageService);
+    const user = { name: 'Joey', age: 38, weight: 175, friends: [] };
+    service.addUser(user);
+    service.users.subscribe(users => {
+      expect(users[0].name).toEqual(user.name);
+    });
+  });
 });
