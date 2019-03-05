@@ -1,11 +1,26 @@
+@import '../../../style/variables.scss';
 :host {
   .user-form {
     max-width: 400px;
+    background-color: $dark-primary;
+    min-height: 100vh;
+    color: $white;
+    .user-form--title {
+      display: flex;
+      align-items: center;
+      color: $white;
+      text-shadow: 1px 1px $accent;
+    }
     .user-form--form {
+      background-color: $white;
+      color: $primary-text;
+      border-radius: 2rem;
+      border: 2px solid $accent;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      padding-top: 1rem;
       .user-form--form__field {
         width: 80%;
         margin: .5rem;

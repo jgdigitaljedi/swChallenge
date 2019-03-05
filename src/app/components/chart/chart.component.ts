@@ -4,23 +4,8 @@ import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
 import * as _cloneDeep from 'lodash/cloneDeep';
 import * as _flatten from 'lodash/flatten';
-import { AttrAst } from '@angular/compiler';
+import { INode, ILink, IGraph } from './chart.model';
 
-interface Node {
-  id: string;
-  group: number;
-}
-
-interface Link {
-  source: string;
-  target: string;
-  // value: number;
-}
-
-interface Graph {
-  nodes: Node[];
-  links: Link[];
-}
 
 @Component({
   selector: 'app-chart',
@@ -32,15 +17,15 @@ export class ChartComponent implements OnInit {
   allUsers: IUser[];
   margin = { top: 20, right: 20, bottom: 30, left: 40 };
   colorArr = [
-    { key: 0, value: '#90caf9' },
-    { key: 1, value: '#80deea' },
-    { key: 2, value: '#a5d6a7' },
-    { key: 3, value: '#e6ee9c' },
-    { key: 4, value: '#ffe082' },
-    { key: 5, value: '#ffab91' },
-    { key: 6, value: '#bcaaa4' },
-    { key: 7, value: '#eeeeee' },
-    { key: 8, value: '#b0bec5' }
+    { key: 0, value: '#90caf9', range: '0 - 9' },
+    { key: 1, value: '#80deea', range: '10 - 19' },
+    { key: 2, value: '#a5d6a7', range: '20 - 29' },
+    { key: 3, value: '#e6ee9c', range: '30 - 39' },
+    { key: 4, value: '#ffe082', range: '40 - 49' },
+    { key: 5, value: '#ffab91', range: '50 - 59' },
+    { key: 6, value: '#bcaaa4', range: '60 - 69' },
+    { key: 7, value: '#eeeeee', range: '70 - 79' },
+    { key: 8, value: '#b0bec5', range: '80 - 89' }
   ];
   constructor(private _storage: StorageService) { }
 
@@ -69,7 +54,6 @@ export class ChartComponent implements OnInit {
       };
     });
     const links = this._getLinks(data);
-    console.log('links', links);
     const contentWidth = element.offsetWidth - this.margin.left - this.margin.right;
     const contentHeight = element.offsetHeight - this.margin.top - this.margin.bottom;
     const svg = d3
@@ -85,7 +69,7 @@ export class ChartComponent implements OnInit {
       .force('charge', d3.forceManyBody().strength(100))
       .force('center', d3.forceCenter(contentWidth / 2, contentHeight / 2));
 
-    const graph: Graph = <Graph>{ nodes: data, links };
+    const graph: IGraph = <IGraph>{ nodes: data, links };
 
     const link = svg
       .append('g')
@@ -118,56 +102,17 @@ export class ChartComponent implements OnInit {
     const circle = node
       .append('circle')
       .attr('r', d => {
-        return d['weight'] / 4;
+        return d.weight / 4;
       })
       .attr('fill', d => {
-        return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
+        return this.colorArr.filter(color => color.key === Math.floor(d.age / 10))[0].value;
       });
 
-    // const node = svg
-    //   .selectAll('.node')
-    //   .data(graph.nodes)
-    //   .enter()
-    //   .append('g')
-    //   .attr('class', 'node')
-    //   .call(
-    //     d3
-    //       .drag()
-    //       .on('start', dragstarted)
-    //       .on('drag', dragged)
-    //       .on('end', dragended)
-    //   );
-
-    // node
-    //   .append('circle')
-    //   .attr('r', d => {
-    //     return d['weight'] / 5;
-    //   })
-    //   .attr('fill', d => {
-    //     return this.colorArr.filter(color => color.key === Math.floor(d['age'] / 10))[0].value;
-    //   });
-
     const text = node
-      // .selectAll('text')
-      // .data(graph.nodes)
-      // .enter()
       .append('text')
-      .text(d => d['name'])
+      .text(d => d.name)
       .style('text-anchor', 'middle')
       .attr('font-size', 14);
-    // .data(graph.nodes)
-    // .enter()
-    // .append('text')
-    // .text(d => d['name'])
-    // .attr('fill', '#000')
-
-    // svg.selectAll('.node').call(
-    //   d3
-    //     .drag()
-    //     .on('start', dragstarted)
-    //     .on('drag', dragged)
-    //     .on('end', dragended)
-    // );
 
     force.nodes(graph.nodes).on('tick', ticked);
 
@@ -188,14 +133,7 @@ export class ChartComponent implements OnInit {
           return d.target.y;
         });
 
-      // node.selectAll('circle')
-      //   .attr('cx', function (d: any) {
-      //     return d.x;
-      //   })
-      //   .attr('cy', function (d: any) {
-      //     return d.y;
-      //   });
-      node.attr("transform", function (d) { return 'translate(' + [d['x'], d['y']] + ')'; })
+      node.attr("transform", function (d) { return 'translate(' + [d.x, d.y] + ')'; })
     }
 
     function dragstarted(d) {
