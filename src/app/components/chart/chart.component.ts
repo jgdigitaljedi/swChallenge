@@ -4,19 +4,27 @@ import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
 import * as _cloneDeep from 'lodash/cloneDeep';
 import * as _flatten from 'lodash/flatten';
-import { IGraph } from './chart.model';
+import { IGraph, ILink, IColor, IChartData } from './chart.model';
 
 
+/**
+ * d3 svg chart force layout chart with legend
+ *
+ * @export
+ * @class ChartComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
+
 export class ChartComponent implements OnInit {
   @ViewChild('chart') private chartContainer: ElementRef;
   allUsers: IUser[];
   margin = { top: 20, right: 20, bottom: 30, left: 40 };
-  colorArr = [
+  colorArr: IColor[] = [
     { key: 0, value: '#f44336', range: '0 - 9' },
     { key: 1, value: '#9c27b0', range: '10 - 19' },
     { key: 2, value: '#3f51b5', range: '20 - 29' },
@@ -33,6 +41,12 @@ export class ChartComponent implements OnInit {
   ];
   constructor(private _storage: StorageService) { }
 
+  /**
+   * Subscribes to storage service data and creates chart
+   *
+   * @returns
+   * @memberof ChartComponent
+   */
   ngOnInit() {
     this._storage.users.subscribe(users => {
       this.allUsers = users;
@@ -44,7 +58,12 @@ export class ChartComponent implements OnInit {
     this.createChart();
   }
 
-  createChart() {
+  /**
+   * Method responsible for creating chart
+   *
+   * @memberof ChartComponent
+   */
+  createChart(): void {
     d3.select('svg').remove();
     const element = this.chartContainer.nativeElement;
     const data = _cloneDeep(this.allUsers).map(user => {
@@ -166,13 +185,13 @@ export class ChartComponent implements OnInit {
   }
 
   /**
-   * Draws legend for force sim chart
+   * Draws legend for force chart
    *
    * @private
-   * @param {*} svg
+   * @param {d3.Selection<SVGElement, {}, HTMLElement, any>} svg
    * @memberof ChartComponent
    */
-  private _drawLegend(svg): void {
+  private _drawLegend(svg: d3.Selection<SVGElement, {}, HTMLElement, any>): void {
     const cLen = this.colorArr.length;
     const legend = svg
       .append('g');
@@ -241,7 +260,15 @@ export class ChartComponent implements OnInit {
       .attr('font-size', '16px');
   }
 
-  private _getLinks(data) {
+  /**
+   * Creates links array with proper data structure 
+   *
+   * @private
+   * @param {IChartData[]} data
+   * @returns {ILink[]}
+   * @memberof ChartComponent
+   */
+  private _getLinks(data: IChartData[]): ILink[] {
     return _flatten(
       data.map(item => {
         return item.targets.map(t => {

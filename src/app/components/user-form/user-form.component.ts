@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
 
@@ -18,8 +18,13 @@ import { IUser } from 'src/app/models/user.model';
 export class UserFormComponent implements OnInit {
   personForm: FormGroup;
   allUsers: IUser[];
-  constructor(private _fb: FormBuilder, private _storage: StorageService) {}
+  constructor(private _fb: FormBuilder, private _storage: StorageService) { }
 
+  /**
+   * Initializes form group and controls and subscribes to changes in storage service
+   *
+   * @memberof UserFormComponent
+   */
   ngOnInit() {
     this._initForm();
     this._storage.users.subscribe(users => {
@@ -28,7 +33,13 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  onSubmit(formDirective): void {
+  /**
+   * Adds user to temporary storage service
+   *
+   * @param {FormGroupDirective} formDirective
+   * @memberof UserFormComponent
+   */
+  onSubmit(formDirective: FormGroupDirective): void {
     if (this.personForm && this.personForm.value && this.personForm.valid) {
       const newUser = this.personForm.value;
       this._storage.addUser(newUser);
@@ -45,8 +56,6 @@ export class UserFormComponent implements OnInit {
   clearForm(): void {
     this._initForm();
   }
-
-  addToFriends() {}
 
   /**
    * Method to clear out form

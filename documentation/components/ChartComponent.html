@@ -1,0 +1,957 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>sw-challenge documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	    <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">sw-challenge documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">sw-challenge documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/AppModule.html" >AppModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/AppRoutingModule.html" >AppRoutingModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ChartComponent.html"  class="active" >ChartComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/UserFormComponent.html" >UserFormComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-classes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="../classes/AppPage.html" >AppPage</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/StorageService.html" >StorageService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/IChartData.html" >IChartData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/IColor.html" >IColor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/IGraph.html" >IGraph</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ILink.html" >ILink</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/INode.html" >INode</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/IUser.html" >IUser</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">sw-challenge documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/AppModule.html" >AppModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/AppRoutingModule.html" >AppRoutingModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ChartComponent.html"  class="active" >ChartComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/UserFormComponent.html" >UserFormComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#classes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../classes/AppPage.html" >AppPage</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/StorageService.html" >StorageService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/IChartData.html" >IChartData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/IColor.html" >IColor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/IGraph.html" >IGraph</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ILink.html" >ILink</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/INode.html" >INode</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/IUser.html" >IUser</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
+               </div>
+               <div class="content component">
+                   <div class="content-data">
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ChartComponent</li>
+</ol>
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/chart/chart.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>d3 svg chart force layout chart with legend</p>
+
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-chart</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>chart.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>chart.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(_storage: any)</code>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> createChart</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>createChart()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Method responsible for creating chart</p>
+    </div>
+                                <div class="io-description">
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> _drawLegend</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>_drawLegend(svg: Selection<SVGElement, {}, HTMLElement, any>)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Draws legend for force chart&lt;SVGElement, {}, HTMLElement, any&gt;} svg</p>
+    </div>
+                                <div class="io-description">
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> _getLinks</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>_getLinks(data: IChartData[])</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Creates links array with proper data structure </p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>data</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>ILink[]</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        <p>* </p>
+    
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> allUsers</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>allUsers:     <code>any[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> chartContainer</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>chartContainer:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> colorArr</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>colorArr:     <code>IColor[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> margin</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>margin:     <code>{ top: number; right: number; bottom: number; left: number; }</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+</div>
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import { Component, OnInit, ViewChild, ElementRef } from &#x27;@angular/core&#x27;;
+import * as d3 from &#x27;d3&#x27;;
+import { StorageService } from &#x27;src/app/services/storage.service&#x27;;
+import { IUser } from &#x27;src/app/models/user.model&#x27;;
+import * as _cloneDeep from &#x27;lodash/cloneDeep&#x27;;
+import * as _flatten from &#x27;lodash/flatten&#x27;;
+import { IGraph, ILink, IColor, IChartData } from &#x27;./chart.model&#x27;;
+
+
+/**
+ * d3 svg chart force layout chart with legend
+ *
+ * @export
+ * @class ChartComponent
+ * @implements {OnInit}
+ */
+@Component({
+  selector: &#x27;app-chart&#x27;,
+  templateUrl: &#x27;./chart.component.html&#x27;,
+  styleUrls: [&#x27;./chart.component.scss&#x27;]
+})
+
+export class ChartComponent implements OnInit {
+  @ViewChild(&#x27;chart&#x27;) private chartContainer: ElementRef;
+  allUsers: IUser[];
+  margin &#x3D; { top: 20, right: 20, bottom: 30, left: 40 };
+  colorArr: IColor[] &#x3D; [
+    { key: 0, value: &#x27;#f44336&#x27;, range: &#x27;0 - 9&#x27; },
+    { key: 1, value: &#x27;#9c27b0&#x27;, range: &#x27;10 - 19&#x27; },
+    { key: 2, value: &#x27;#3f51b5&#x27;, range: &#x27;20 - 29&#x27; },
+    { key: 3, value: &#x27;#2196f3&#x27;, range: &#x27;30 - 39&#x27; },
+    { key: 4, value: &#x27;#00bcd4&#x27;, range: &#x27;40 - 49&#x27; },
+    { key: 5, value: &#x27;#009688&#x27;, range: &#x27;50 - 59&#x27; },
+    { key: 6, value: &#x27;#8bc34a&#x27;, range: &#x27;60 - 69&#x27; },
+    { key: 7, value: &#x27;#ffeb3b&#x27;, range: &#x27;70 - 79&#x27; },
+    { key: 8, value: &#x27;#ff9800&#x27;, range: &#x27;80 - 89&#x27; },
+    { key: 9, value: &#x27;#ff5722&#x27;, range: &#x27;90 - 99&#x27; },
+    { key: 10, value: &#x27;#795548&#x27;, range: &#x27;100 - 109&#x27; },
+    { key: 11, value: &#x27;#9e9e9e&#x27;, range: &#x27;110 - 119&#x27; },
+    { key: 12, value: &#x27;#607d8b&#x27;, range: &#x27;120&#x27; }
+  ];
+  constructor(private _storage: StorageService) { }
+
+  /**
+   * Subscribes to storage service data and creates chart
+   *
+   * @returns
+   * @memberof ChartComponent
+   */
+  ngOnInit() {
+    this._storage.users.subscribe(users &#x3D;&gt; {
+      this.allUsers &#x3D; users;
+      this.createChart();
+    });
+    if (!this.allUsers &amp;&amp; this.allUsers.length) {
+      return;
+    }
+    this.createChart();
+  }
+
+  /**
+   * Method responsible for creating chart
+   *
+   * @memberof ChartComponent
+   */
+  createChart(): void {
+    d3.select(&#x27;svg&#x27;).remove();
+    const element &#x3D; this.chartContainer.nativeElement;
+    const data &#x3D; _cloneDeep(this.allUsers).map(user &#x3D;&gt; {
+      // just making it more semantic of a data structure for the chart; not really necessary; for my sanity
+      return {
+        source: user.id,
+        name: user.name,
+        targets: user.friends ? user.friends.map(friend &#x3D;&gt; friend.id) : [],
+        weight: user.weight,
+        age: user.age
+      };
+    });
+    const links &#x3D; this._getLinks(data);
+    const contentWidth &#x3D; element.offsetWidth - this.margin.left - this.margin.right;
+    const contentHeight &#x3D; element.offsetHeight - this.margin.top - this.margin.bottom;
+    const svg &#x3D; d3
+      .select(element)
+      .append(&#x27;svg&#x27;)
+      .attr(&#x27;width&#x27;, contentWidth)
+      .attr(&#x27;height&#x27;, contentHeight);
+
+    this._drawLegend(svg);
+
+    const force &#x3D; d3
+      .forceSimulation()
+      .force(&#x27;link&#x27;, d3.forceLink().distance(250))
+      .force(&#x27;charge&#x27;, d3.forceManyBody().strength(100))
+      .force(&#x27;center&#x27;, d3.forceCenter(contentWidth / 2, contentHeight / 2));
+
+    const graph: IGraph &#x3D; &lt;IGraph&gt;{ nodes: data, links };
+
+    const link &#x3D; svg
+      .append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;links&#x27;)
+      .selectAll(&#x27;line&#x27;)
+      .data(graph.links)
+      .enter()
+      .append(&#x27;line&#x27;)
+      .attr(&#x27;stroke-width&#x27;, 3)
+      .attr(&#x27;stroke&#x27;, &#x27;#000&#x27;);
+
+    const svgNode &#x3D; svg
+      .append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;nodes&#x27;);
+
+    const node &#x3D; svgNode
+      .selectAll(&#x27;.node&#x27;)
+      .data(graph.nodes)
+      .enter().append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;node&#x27;)
+      .call(
+        d3
+          .drag()
+          .on(&#x27;start&#x27;, dragstarted)
+          .on(&#x27;drag&#x27;, dragged)
+          .on(&#x27;end&#x27;, dragended)
+      );
+
+
+    const circle &#x3D; node
+      .append(&#x27;circle&#x27;)
+      .attr(&#x27;r&#x27;, d &#x3D;&gt; {
+        return d.weight / 4;
+      })
+      .attr(&#x27;fill&#x27;, d &#x3D;&gt; {
+        return this.colorArr.filter(color &#x3D;&gt; color.key &#x3D;&#x3D;&#x3D; Math.floor(d.age / 10))[0].value;
+      });
+
+    const text &#x3D; node
+      .append(&#x27;text&#x27;)
+      .text(d &#x3D;&gt; d.name)
+      .style(&#x27;text-anchor&#x27;, &#x27;middle&#x27;)
+      .attr(&#x27;y&#x27;, 5)
+      .attr(&#x27;font-size&#x27;, 14)
+      .style(&#x27;fill&#x27;, &#x27;#fafafa&#x27;);
+
+    force.nodes(graph.nodes).on(&#x27;tick&#x27;, ticked);
+
+    force.force&lt;d3.ForceLink&lt;any, any&gt;&gt;(&#x27;link&#x27;).links(graph.links);
+
+    function ticked() {
+      link
+        .attr(&#x27;x1&#x27;, function (d: any) {
+          return d.source.x;
+        })
+        .attr(&#x27;y1&#x27;, function (d: any) {
+          return d.source.y;
+        })
+        .attr(&#x27;x2&#x27;, function (d: any) {
+          return d.target.x;
+        })
+        .attr(&#x27;y2&#x27;, function (d: any) {
+          return d.target.y;
+        });
+
+      node.attr(&#x27;transform&#x27;, function (d) { return &#x27;translate(&#x27; + [d.x, d.y] + &#x27;)&#x27;; })
+    }
+
+    function dragstarted(d) {
+      if (!d3.event.active) {
+        force.alphaTarget(0.3).restart();
+      }
+      d.fx &#x3D; d.x;
+      d.fy &#x3D; d.y;
+    }
+
+    function dragged(d) {
+      d.fx &#x3D; d3.event.x;
+      d.fy &#x3D; d3.event.y;
+    }
+
+    function dragended(d) {
+      if (!d3.event.active) {
+        force.alphaTarget(0);
+      }
+      d.fx &#x3D; null;
+      d.fy &#x3D; null;
+    }
+  }
+
+  /**
+   * Draws legend for force chart
+   *
+   * @private
+   * @param {d3.Selection&lt;SVGElement, {}, HTMLElement, any&gt;} svg
+   * @memberof ChartComponent
+   */
+  private _drawLegend(svg: d3.Selection&lt;SVGElement, {}, HTMLElement, any&gt;): void {
+    const cLen &#x3D; this.colorArr.length;
+    const legend &#x3D; svg
+      .append(&#x27;g&#x27;);
+
+    legend
+      .append(&#x27;rect&#x27;)
+      .style(&#x27;fill&#x27;, &#x27;#00BCD4&#x27;)
+      .attr(&#x27;color&#x27;, &#x27;#fafafa&#x27;)
+      .attr(&#x27;x&#x27;, 0)
+      .attr(&#x27;y&#x27;, 0)
+      .attr(&#x27;width&#x27;, 220)
+      .attr(&#x27;height&#x27;, 190);
+
+    const innerLegend &#x3D; legend.selectAll(&#x27;rect&#x27;)
+      .data(this.colorArr)
+      .enter();
+
+    innerLegend
+      .append(&#x27;rect&#x27;)
+      .attr(&#x27;x&#x27;, (d, i) &#x3D;&gt; {
+        if (i &lt; (cLen / 2)) {
+          return 10;
+        } else {
+          return 110;
+        }
+      })
+      .attr(&#x27;y&#x27;, function (d, i) {
+        if (i &lt; (cLen / 2)) {
+          return i * 20 + 32;
+        } else {
+          return ((i + 1) - cLen / 2) * 20 + 22;
+        }
+      })
+      .attr(&#x27;width&#x27;, 16)
+      .attr(&#x27;height&#x27;, 16)
+      .style(&#x27;fill&#x27;, (d) &#x3D;&gt; d.value)
+      .attr(&#x27;stroke&#x27;, &#x27;#fafafa&#x27;)
+      .attr(&#x27;stroke-width&#x27;, 1);
+
+    innerLegend
+      .append(&#x27;text&#x27;)
+      .attr(&#x27;x&#x27;, 13)
+      .attr(&#x27;y&#x27;, 35)
+      .attr(&#x27;font-size&#x27;, &#x27;24px&#x27;)
+      .text(&#x27;Age Range - Color&#x27;)
+      .attr(&#x27;fill&#x27;, &#x27;#fafafa&#x27;);
+
+    innerLegend
+      .append(&#x27;text&#x27;)
+      .text((d) &#x3D;&gt; d.range)
+      .attr(&#x27;x&#x27;, (d, i) &#x3D;&gt; {
+        if (i &lt; (cLen / 2)) {
+          return 40;
+        } else {
+          return 140;
+        }
+      })
+      .attr(&#x27;y&#x27;, (d, i) &#x3D;&gt; {
+        if (i &lt; (cLen / 2)) {
+          return i * 20 + 45;
+        } else {
+          return ((i + 1) - cLen / 2) * 20 + 35;
+        }
+      })
+      .attr(&#x27;fill&#x27;, &#x27;#fafafa&#x27;)
+      .attr(&#x27;font-size&#x27;, &#x27;16px&#x27;);
+  }
+
+  /**
+   * Creates links array with proper data structure 
+   *
+   * @private
+   * @param {IChartData[]} data
+   * @returns {ILink[]}
+   * @memberof ChartComponent
+   */
+  private _getLinks(data: IChartData[]): ILink[] {
+    return _flatten(
+      data.map(item &#x3D;&gt; {
+        return item.targets.map(t &#x3D;&gt; {
+          return { source: item.source, target: t, name: item.name };
+        });
+      })
+    );
+  }
+}
+</code></pre>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+           </div>
+       </div>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
+
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
+
+    </body>
+</html>
