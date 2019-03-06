@@ -12,8 +12,9 @@ I know I had 48 hours, but things have been too busy to devote a lot of time to 
 - Better use of d3. It occurred to me that I'm destroying and creating the chart each time. It works, but I could have explored just adding nodes and links which would have been much better for user experience. I also remembered this morning that d3 has a lot of color functions so I could have also made the age colors appear as a gradient rather than just a solid color choice for each 10 year group. This would have allowed you to know if someone was closer to the end or the beginning of an age range by looking at the chart.
 - D3 events as chart.component methods. I wrote functions inside of the createChart method to save time. Moving them into their own component methods and probably using .bind(this) to call them would have been cleaner. It would have also required me to look up some of the strange d3 typings and involved a little refactor which, again, I was too pressed for time to prioritize.
 - Make it less ugly. It's ugly. I wasn't trying to win a design award, but time permitting I would have added more animations and made the layout better.
+- Make it responsive.
 
-It also occurred to me in the shower this morning, and I  never Googled this, that I answered the HostBindings question wrong EVERYTIME it was asked. I remember using it now for scroll events. I'm reasonably sure it is used to capture DOM events that aren't included in the standard Angular feature set (click, mousein, keypress, etc). I'm kicking myself for that!
+It also occurred to me in the shower this morning, and I  never Googled this, that I answered the HostBinding question wrong EVERYTIME it was asked. I remember using it now for scroll events. I'm reasonably sure it is used to capture DOM events that aren't included in the standard Angular feature set (click, mouseover, keypress, window resize, etc). I'm kicking myself for that!
 
 ## Setup
 ```
