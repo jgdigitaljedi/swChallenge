@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormGroupDirective
+} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
 import { InstructionsDialogComponent } from '../instructions-dialog/instructions-dialog.component';
+import { formDirectiveProvider } from '@angular/forms/src/directives/reactive_directives/form_group_directive';
 
 /**
  * Logic for user form validation and submission
@@ -18,9 +25,14 @@ import { InstructionsDialogComponent } from '../instructions-dialog/instructions
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
+  @ViewChild('formDirective') formDir;
   personForm: FormGroup;
   allUsers: IUser[];
-  constructor(private _fb: FormBuilder, private _storage: StorageService, private _dialog: MatDialog) { }
+  constructor(
+    private _fb: FormBuilder,
+    private _storage: StorageService,
+    private _dialog: MatDialog
+  ) {}
 
   /**
    * Initializes form group and controls and subscribes to changes in storage service

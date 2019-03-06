@@ -10,12 +10,13 @@ import { MatListModule } from '@angular/material/list';
 import { UserFormComponent } from './user-form.component';
 import { InstructionsDialogComponent } from '../instructions-dialog/instructions-dialog.component';
 import { StorageService } from 'src/app/services/storage.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('UserFormComponent', () => {
   let component: UserFormComponent;
   let fixture: ComponentFixture<UserFormComponent>;
+  let injectedService: StorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,22 +33,29 @@ describe('UserFormComponent', () => {
         FormsModule,
         BrowserAnimationsModule
       ],
-      declarations: [
-        UserFormComponent,
-        InstructionsDialogComponent
-      ],
+      declarations: [UserFormComponent, InstructionsDialogComponent],
       providers: [StorageService]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserFormComponent);
     component = fixture.componentInstance;
+    injectedService = TestBed.get(StorageService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should add a user and have allUsers automatically updated', () => {
+    component.personForm.get('name').setValue('Joey');
+    component.personForm.get('age').setValue(38);
+    component.personForm.get('weight').setValue(171);
+    component.personForm.get('friends').setValue([]);
+    const mockForm = component.formDir;
+    component.onSubmit(mockForm);
+    expect(component.allUsers.length).toEqual(1);
   });
 });
