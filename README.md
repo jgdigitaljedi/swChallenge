@@ -14,7 +14,7 @@ I know I had 48 hours, but things have been too busy to devote a lot of time to 
 - Make it less ugly. It's ugly. I wasn't trying to win a design award, but time permitting I would have added more animations and made the layout better.
 - Make it responsive.
 
-It also occurred to me in the shower this morning, and I  never Googled this, that I answered the HostBinding question wrong EVERYTIME it was asked. I remember using it now for scroll events. I'm reasonably sure it is used to capture DOM events that aren't included in the standard Angular feature set (click, mouseover, keypress, window resize, etc). I'm kicking myself for that!
+It also occurred to me in the shower this morning, and I  never Googled this, that I answered the HostBinding question wrong EVERYTIME it was asked. I remember using it now for scroll events. I'm reasonably sure it is used to capture DOM events that aren't included in the standard Angular feature set (window resize, scroll, etc). I'm kicking myself for that!
 
 ## Setup
 ```
