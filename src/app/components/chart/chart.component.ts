@@ -6,7 +6,6 @@ import * as _cloneDeep from 'lodash/cloneDeep';
 import * as _flatten from 'lodash/flatten';
 import { IGraph, ILink, IColor, IChartData } from './chart.model';
 
-
 /**
  * d3 svg chart force layout chart with legend
  *
@@ -19,7 +18,6 @@ import { IGraph, ILink, IColor, IChartData } from './chart.model';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-
 export class ChartComponent implements OnInit {
   @ViewChild('chart') private chartContainer: ElementRef;
   allUsers: IUser[];
@@ -39,7 +37,7 @@ export class ChartComponent implements OnInit {
     { key: 11, value: '#9e9e9e', range: '110 - 119' },
     { key: 12, value: '#607d8b', range: '120' }
   ];
-  constructor(private _storage: StorageService) { }
+  constructor(private _storage: StorageService) {}
 
   /**
    * Subscribes to storage service data and creates chart
@@ -65,6 +63,7 @@ export class ChartComponent implements OnInit {
    */
   createChart(): void {
     d3.select('svg').remove();
+    /** I don't like this appraoch and, if I have time, I will add nodes and links instead of redrawing each time */
     const element = this.chartContainer.nativeElement;
     const data = _cloneDeep(this.allUsers).map(user => {
       // just making it more semantic of a data structure for the chart; not really necessary; for my sanity
@@ -108,15 +107,14 @@ export class ChartComponent implements OnInit {
       .attr('stroke', '#000');
 
     // create group for nodes
-    const svgNode = svg
-      .append('g')
-      .attr('class', 'nodes');
+    const svgNode = svg.append('g').attr('class', 'nodes');
 
     // add g for individual node
     const node = svgNode
       .selectAll('.node')
       .data(graph.nodes)
-      .enter().append('g')
+      .enter()
+      .append('g')
       .attr('class', 'node')
       .call(
         d3
@@ -125,7 +123,6 @@ export class ChartComponent implements OnInit {
           .on('drag', dragged)
           .on('end', dragended)
       );
-
 
     // add circle to node group
     const circle = node
@@ -149,25 +146,27 @@ export class ChartComponent implements OnInit {
     // tick event listener and actions
     force.nodes(graph.nodes).on('tick', () => {
       link
-        .attr('x1', function (d: any) {
+        .attr('x1', function(d: any) {
           return d.source.x;
         })
-        .attr('y1', function (d: any) {
+        .attr('y1', function(d: any) {
           return d.source.y;
         })
-        .attr('x2', function (d: any) {
+        .attr('x2', function(d: any) {
           return d.target.x;
         })
-        .attr('y2', function (d: any) {
+        .attr('y2', function(d: any) {
           return d.target.y;
         });
 
-      node.attr('transform', function (d) { return 'translate(' + [d.x, d.y] + ')'; })
+      node.attr('transform', function(d) {
+        return 'translate(' + [d.x, d.y] + ')';
+      });
     });
 
     force.force<d3.ForceLink<any, any>>('link').links(graph.links);
 
-    /** These could have been broken into component methods but weren't for time's sake for this challenge. 
+    /** These could have been broken into component methods but weren't for time's sake for this challenge.
      * It would be a lot of typing and hoisting method vars into component vars which is merely time consuming ATM.
      * Typically I would rarely have functions like this inside a component unless there was recursion or something weird.
      * */
@@ -202,8 +201,7 @@ export class ChartComponent implements OnInit {
    */
   private _drawLegend(svg: d3.Selection<SVGElement, {}, HTMLElement, any>): void {
     const cLen = this.colorArr.length;
-    const legend = svg
-      .append('g');
+    const legend = svg.append('g');
 
     legend
       .append('rect')
@@ -214,29 +212,30 @@ export class ChartComponent implements OnInit {
       .attr('width', 220)
       .attr('height', 190);
 
-    const innerLegend = legend.selectAll('rect')
+    const innerLegend = legend
+      .selectAll('rect')
       .data(this.colorArr)
       .enter();
 
     innerLegend
       .append('rect')
       .attr('x', (d, i) => {
-        if (i < (cLen / 2)) {
+        if (i < cLen / 2) {
           return 10;
         } else {
           return 110;
         }
       })
-      .attr('y', function (d, i) {
-        if (i < (cLen / 2)) {
+      .attr('y', function(d, i) {
+        if (i < cLen / 2) {
           return i * 20 + 32;
         } else {
-          return ((i + 1) - cLen / 2) * 20 + 22;
+          return (i + 1 - cLen / 2) * 20 + 22;
         }
       })
       .attr('width', 16)
       .attr('height', 16)
-      .style('fill', (d) => d.value)
+      .style('fill', d => d.value)
       .attr('stroke', '#fafafa')
       .attr('stroke-width', 1);
 
@@ -250,19 +249,19 @@ export class ChartComponent implements OnInit {
 
     innerLegend
       .append('text')
-      .text((d) => d.range)
+      .text(d => d.range)
       .attr('x', (d, i) => {
-        if (i < (cLen / 2)) {
+        if (i < cLen / 2) {
           return 40;
         } else {
           return 140;
         }
       })
       .attr('y', (d, i) => {
-        if (i < (cLen / 2)) {
+        if (i < cLen / 2) {
           return i * 20 + 45;
         } else {
-          return ((i + 1) - cLen / 2) * 20 + 35;
+          return (i + 1 - cLen / 2) * 20 + 35;
         }
       })
       .attr('fill', '#fafafa')
@@ -270,7 +269,7 @@ export class ChartComponent implements OnInit {
   }
 
   /**
-   * Creates links array with proper data structure 
+   * Creates links array with proper data structure
    *
    * @private
    * @param {IChartData[]} data
