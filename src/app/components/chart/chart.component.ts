@@ -90,7 +90,7 @@ export class ChartComponent implements OnInit {
     const force = d3
       .forceSimulation()
       .force('link', d3.forceLink().distance(250))
-      .force('charge', d3.forceManyBody().strength(100))
+      .force('charge', d3.forceManyBody().strength(10))
       .force('center', d3.forceCenter(contentWidth / 2, contentHeight / 2));
 
     const graph: IGraph = <IGraph>{ nodes: data, links };
