@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import * as d3 from 'd3';
 import { StorageService } from 'src/app/services/storage.service';
 import { IUser } from 'src/app/models/user.model';
 import * as _cloneDeep from 'lodash/cloneDeep';
 import * as _flatten from 'lodash/flatten';
 import { IGraph, ILink, IColor, IChartData } from './chart.model';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 /**
  * d3 svg chart force layout chart with legend
@@ -18,7 +19,7 @@ import { IGraph, ILink, IColor, IChartData } from './chart.model';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnDestroy {
   @ViewChild('chart') private chartContainer: ElementRef;
   allUsers: IUser[];
   margin = { top: 20, right: 20, bottom: 30, left: 40 }; // implicitly typed
@@ -37,7 +38,8 @@ export class ChartComponent implements OnInit {
     { key: 11, value: '#9e9e9e', range: '110 - 119' },
     { key: 12, value: '#607d8b', range: '120' }
   ];
-  constructor(private _storage: StorageService) {}
+  chartSubscription;
+  constructor(private _storage: StorageService) { }
 
   /**
    * Subscribes to storage service data and creates chart
@@ -46,7 +48,7 @@ export class ChartComponent implements OnInit {
    * @memberof ChartComponent
    */
   ngOnInit() {
-    this._storage.users.subscribe(users => {
+    this.chartSubscription = this._storage.users.subscribe(users => {
       this.allUsers = users;
       this.createChart();
     });
@@ -54,6 +56,10 @@ export class ChartComponent implements OnInit {
       return;
     }
     this.createChart();
+  }
+
+  ngOnDestroy() {
+    this.chartSubscription.unsubscribe();
   }
 
   /**
@@ -146,20 +152,20 @@ export class ChartComponent implements OnInit {
     // tick event listener and actions
     force.nodes(graph.nodes).on('tick', () => {
       link
-        .attr('x1', function(d: any) {
+        .attr('x1', function (d: any) {
           return d.source.x;
         })
-        .attr('y1', function(d: any) {
+        .attr('y1', function (d: any) {
           return d.source.y;
         })
-        .attr('x2', function(d: any) {
+        .attr('x2', function (d: any) {
           return d.target.x;
         })
-        .attr('y2', function(d: any) {
+        .attr('y2', function (d: any) {
           return d.target.y;
         });
 
-      node.attr('transform', function(d) {
+      node.attr('transform', function (d) {
         return 'translate(' + [d.x, d.y] + ')';
       });
     });
@@ -226,7 +232,7 @@ export class ChartComponent implements OnInit {
           return 110;
         }
       })
-      .attr('y', function(d, i) {
+      .attr('y', function (d, i) {
         if (i < cLen / 2) {
           return i * 20 + 32;
         } else {
